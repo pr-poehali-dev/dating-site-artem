@@ -1,8 +1,38 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import Icon from "@/components/ui/icon";
+import { useState, useEffect } from "react";
 
 const Index = () => {
+  const [onlineCount, setOnlineCount] = useState(0);
+  const [registeredCount, setRegisteredCount] = useState(0);
+
+  useEffect(() => {
+    const baseOnline = 47;
+    const baseRegistered = 523;
+    
+    const updateOnline = () => {
+      const variance = Math.floor(Math.random() * 8) - 4;
+      setOnlineCount(baseOnline + variance);
+    };
+    
+    const updateRegistered = () => {
+      const variance = Math.floor(Math.random() * 5);
+      setRegisteredCount(baseRegistered + variance);
+    };
+    
+    updateOnline();
+    updateRegistered();
+    
+    const onlineInterval = setInterval(updateOnline, 5000);
+    const registeredInterval = setInterval(updateRegistered, 10000);
+    
+    return () => {
+      clearInterval(onlineInterval);
+      clearInterval(registeredInterval);
+    };
+  }, []);
+
   const handleTelegramClick = () => {
     window.open('https://t.me/your_bot_username', '_blank');
   };
@@ -15,9 +45,13 @@ const Index = () => {
         <div className="container mx-auto max-w-6xl relative z-10">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div className="space-y-8 animate-fade-in">
-              <div className="inline-block">
+              <div className="flex flex-wrap gap-3">
                 <span className="px-4 py-2 bg-primary/10 text-primary rounded-full text-sm font-semibold">
                   🎉 Приморский край
+                </span>
+                <span className="px-4 py-2 bg-green-100 text-green-700 rounded-full text-sm font-semibold flex items-center gap-2">
+                  <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
+                  {onlineCount} онлайн
                 </span>
               </div>
               
@@ -35,6 +69,11 @@ const Index = () => {
                 Встречай новых друзей, общайся с интересными людьми и находи единомышленников в нашем активном сообществе! 🚀
               </p>
               
+              <div className="inline-flex items-baseline gap-3 bg-accent/10 px-6 py-4 rounded-2xl">
+                <span className="text-sm text-muted-foreground">Доступ в группу:</span>
+                <span className="text-4xl font-bold text-accent">399₽</span>
+              </div>
+              
               <div className="flex flex-col sm:flex-row gap-4">
                 <Button 
                   size="lg" 
@@ -42,14 +81,14 @@ const Index = () => {
                   onClick={handleTelegramClick}
                 >
                   <Icon name="Send" size={24} className="mr-2" />
-                  Присоединиться в Telegram
+                  Присоединиться за 399₽
                 </Button>
               </div>
               
-              <div className="flex items-center gap-8 pt-4">
+              <div className="flex items-center gap-6 pt-4 flex-wrap">
                 <div>
-                  <div className="text-3xl font-bold text-primary">500+</div>
-                  <div className="text-sm text-muted-foreground">Участников</div>
+                  <div className="text-3xl font-bold text-primary">{registeredCount}</div>
+                  <div className="text-sm text-muted-foreground">Зарегистрировано</div>
                 </div>
                 <div className="h-12 w-px bg-border"></div>
                 <div>
@@ -58,8 +97,11 @@ const Index = () => {
                 </div>
                 <div className="h-12 w-px bg-border"></div>
                 <div>
-                  <div className="text-3xl font-bold text-accent">24/7</div>
-                  <div className="text-sm text-muted-foreground">Активность</div>
+                  <div className="text-3xl font-bold text-green-600 flex items-center gap-2">
+                    <span className="w-3 h-3 bg-green-500 rounded-full animate-pulse"></span>
+                    {onlineCount}
+                  </div>
+                  <div className="text-sm text-muted-foreground">Сейчас онлайн</div>
                 </div>
               </div>
             </div>
@@ -152,6 +194,11 @@ const Index = () => {
                 Присоединяйся к нашей группе в Telegram прямо сейчас и начни общение с классными людьми из Артёма и всего Приморского края!
               </p>
               
+              <div className="inline-flex items-center gap-4 bg-gradient-to-r from-accent/20 to-secondary/20 px-8 py-4 rounded-2xl border-2 border-accent/30">
+                <span className="text-lg font-semibold text-foreground">Разовая оплата:</span>
+                <span className="text-5xl font-bold bg-gradient-to-r from-accent to-secondary bg-clip-text text-transparent">399₽</span>
+              </div>
+              
               <div className="flex flex-col sm:flex-row gap-4 justify-center items-center pt-4">
                 <Button 
                   size="lg" 
@@ -159,14 +206,14 @@ const Index = () => {
                   onClick={handleTelegramClick}
                 >
                   <Icon name="Send" size={28} className="mr-3" />
-                  Вступить в группу
+                  Оплатить 399₽ и вступить
                 </Button>
               </div>
               
               <div className="flex items-center justify-center gap-6 pt-8 text-sm text-muted-foreground">
                 <div className="flex items-center gap-2">
                   <Icon name="Check" size={20} className="text-primary" />
-                  <span>Бесплатно</span>
+                  <span>Один раз 399₽</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <Icon name="Check" size={20} className="text-primary" />
@@ -174,7 +221,7 @@ const Index = () => {
                 </div>
                 <div className="flex items-center gap-2">
                   <Icon name="Check" size={20} className="text-primary" />
-                  <span>Дружелюбно</span>
+                  <span>Навсегда доступ</span>
                 </div>
               </div>
             </CardContent>
