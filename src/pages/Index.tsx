@@ -3,6 +3,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import Icon from "@/components/ui/icon";
 import { useState, useEffect } from "react";
 import CountdownTimer from "@/components/CountdownTimer";
+import ExitIntentPopup from "@/components/ExitIntentPopup";
 
 const Index = () => {
   const [onlineCount, setOnlineCount] = useState(0);
@@ -40,6 +41,7 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-background via-purple-50 to-pink-50">
+      <ExitIntentPopup onAction={handleTelegramClick} />
       <section className="relative min-h-screen flex items-center justify-center px-4 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-secondary/10 to-accent/10"></div>
         
