@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import Icon from "@/components/ui/icon";
 import { useState, useEffect } from "react";
+import CountdownTimer from "@/components/CountdownTimer";
 
 const Index = () => {
   const [onlineCount, setOnlineCount] = useState(0);
@@ -69,19 +70,29 @@ const Index = () => {
                 Встречай новых друзей, общайся с интересными людьми и находи единомышленников в нашем активном сообществе! 🚀
               </p>
               
-              <div className="inline-flex items-baseline gap-3 bg-accent/10 px-6 py-4 rounded-2xl">
-                <span className="text-sm text-muted-foreground">Доступ в группу:</span>
-                <span className="text-4xl font-bold text-accent">399₽</span>
+              <div className="space-y-4">
+                <div className="inline-flex items-center gap-3 bg-red-50 border-2 border-red-200 px-6 py-3 rounded-2xl">
+                  <span className="text-sm font-semibold text-red-600">⚡ АКЦИЯ! Скидка 50%</span>
+                </div>
+                <div className="inline-flex items-baseline gap-4 bg-gradient-to-r from-accent/10 to-secondary/10 px-6 py-4 rounded-2xl border-2 border-accent/20">
+                  <div className="flex flex-col">
+                    <span className="text-sm text-muted-foreground line-through">799₽</span>
+                    <div className="flex items-baseline gap-2">
+                      <span className="text-4xl font-bold text-accent">399₽</span>
+                      <span className="text-lg text-muted-foreground">навсегда</span>
+                    </div>
+                  </div>
+                </div>
               </div>
               
               <div className="flex flex-col sm:flex-row gap-4">
                 <Button 
                   size="lg" 
-                  className="text-lg px-8 py-6 bg-gradient-to-r from-primary to-secondary hover:opacity-90 transition-opacity animate-pulse-glow"
+                  className="text-lg px-8 py-6 bg-gradient-to-r from-red-500 to-orange-500 hover:opacity-90 transition-opacity animate-pulse-glow shadow-xl"
                   onClick={handleTelegramClick}
                 >
-                  <Icon name="Send" size={24} className="mr-2" />
-                  Присоединиться за 399₽
+                  <Icon name="Zap" size={24} className="mr-2" />
+                  Купить за 399₽ вместо 799₽
                 </Button>
               </div>
               
@@ -194,33 +205,43 @@ const Index = () => {
                 Присоединяйся к нашей группе в Telegram прямо сейчас и начни общение с классными людьми из Артёма и всего Приморского края!
               </p>
               
-              <div className="inline-flex items-center gap-4 bg-gradient-to-r from-accent/20 to-secondary/20 px-8 py-4 rounded-2xl border-2 border-accent/30">
-                <span className="text-lg font-semibold text-foreground">Разовая оплата:</span>
-                <span className="text-5xl font-bold bg-gradient-to-r from-accent to-secondary bg-clip-text text-transparent">399₽</span>
+              <div className="space-y-6">
+                <div className="inline-flex flex-col items-center gap-4 bg-gradient-to-br from-red-50 to-orange-50 px-10 py-6 rounded-3xl border-4 border-red-200 shadow-xl">
+                  <div className="flex items-center gap-2 text-red-600 font-bold text-lg">
+                    <Icon name="AlertCircle" size={24} />
+                    <span>Акция заканчивается через:</span>
+                  </div>
+                  <CountdownTimer targetHours={6} />
+                  <div className="flex items-baseline gap-4">
+                    <span className="text-2xl text-muted-foreground line-through">799₽</span>
+                    <span className="text-6xl font-bold bg-gradient-to-r from-red-500 to-orange-500 bg-clip-text text-transparent">399₽</span>
+                  </div>
+                  <span className="text-sm text-muted-foreground">Экономия 400₽!</span>
+                </div>
               </div>
               
               <div className="flex flex-col sm:flex-row gap-4 justify-center items-center pt-4">
                 <Button 
                   size="lg" 
-                  className="text-xl px-12 py-7 bg-gradient-to-r from-primary via-secondary to-accent hover:opacity-90 transition-opacity animate-pulse-glow"
+                  className="text-xl px-12 py-7 bg-gradient-to-r from-red-500 via-orange-500 to-red-600 hover:opacity-90 transition-opacity animate-pulse-glow shadow-2xl"
                   onClick={handleTelegramClick}
                 >
-                  <Icon name="Send" size={28} className="mr-3" />
-                  Оплатить 399₽ и вступить
+                  <Icon name="Zap" size={28} className="mr-3" />
+                  Успеть купить за 399₽!
                 </Button>
               </div>
               
-              <div className="flex items-center justify-center gap-6 pt-8 text-sm text-muted-foreground">
+              <div className="flex items-center justify-center gap-6 pt-8 text-sm text-muted-foreground flex-wrap">
                 <div className="flex items-center gap-2">
-                  <Icon name="Check" size={20} className="text-primary" />
-                  <span>Один раз 399₽</span>
+                  <Icon name="Check" size={20} className="text-green-600" />
+                  <span>399₽ вместо 799₽</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <Icon name="Check" size={20} className="text-primary" />
+                  <Icon name="Check" size={20} className="text-green-600" />
                   <span>Без спама</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <Icon name="Check" size={20} className="text-primary" />
+                  <Icon name="Check" size={20} className="text-green-600" />
                   <span>Навсегда доступ</span>
                 </div>
               </div>
